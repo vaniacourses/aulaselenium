@@ -12,7 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.PageFactory;
 
 public class TestaUsuariosGoogle {
 
@@ -32,18 +32,8 @@ public class TestaUsuariosGoogle {
 
 	@Test
 	public void testaUsuarioExistente() throws InterruptedException {
-		WebElement nome = driver.findElement(By.id("firstName"));
-		nome.sendKeys("José");
-		WebElement sobrenome = driver.findElement(By.id("lastName"));
-		sobrenome.sendKeys("da Silva");		
-		WebElement usuario = driver.findElement(By.id("username"));
-		usuario.sendKeys("josedasilva");	
-		WebElement senha = driver.findElement(By.name("Passwd"));
-		senha.sendKeys("12345678");			
-		WebElement confirmaSenha = driver.findElement(By.name("ConfirmPasswd"));
-		confirmaSenha.sendKeys("12345678");			
-		WebElement botaoProximo = driver.findElement(By.id("accountDetailsNext"));
-		botaoProximo.click();	
+		PageUsuario pageUsuario = PageFactory.initElements(driver, PageUsuario.class);
+		pageUsuario.cadastra("José", "da Silva", "josedasilva", "12345678", "12345678");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		WebElement validaUsuario = driver.findElement(By.xpath("//*[@id=\"view_container\"]/form/div[2]/div/div[1]/div[2]/div[1]/div/div[2]/div[2]/div"));
 		assertTrue("Não validou usuário existente", validaUsuario.getText().contains("Este nome de usuário já está em uso. Tente outro."));	
