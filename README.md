@@ -1,4 +1,4 @@
-# Repositório com os exemplos usado na aula sobre Selenium
+# Repositório com os exemplos usados na aula sobre Selenium
 
 Sequência das branches
 
